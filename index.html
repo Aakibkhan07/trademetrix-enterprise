@@ -114,6 +114,17 @@ body::after {
   }
 }
 
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-15px); }
@@ -1095,16 +1106,68 @@ footer strong {
   line-height: 1.4;
 }
 
-.phase-multiplier {
-  font-family: 'Sora', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--success);
-  text-align: center;
-  padding: 8px 12px;
-  background: rgba(0, 255, 127, 0.1);
-  border-radius: 6px;
-}
+  .phase-multiplier {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--success);
+    text-align: center;
+    padding: 8px 12px;
+    background: rgba(0, 255, 127, 0.1);
+    border-radius: 6px;
+  }
+
+  /* Algo Trading Platform CTA */
+  .algo-platform-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    background: linear-gradient(135deg, rgba(0, 255, 127, 0.15), rgba(0, 212, 255, 0.1));
+    border: 2px solid var(--success);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--success);
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    margin-top: 24px;
+    animation: slideInUp 0.6s ease 0.2s both;
+  }
+
+  .algo-platform-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--success), var(--accent));
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+  }
+
+  .algo-platform-cta:hover::before {
+    opacity: 0.1;
+  }
+
+  .algo-platform-cta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 255, 127, 0.3), 0 0 32px rgba(0, 212, 255, 0.2);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .algo-platform-cta span {
+    display: inline-block;
+  }
+
+  .algo-platform-cta-icon {
+    font-size: 18px;
+  }
 
 .interest-comparison {
   display: flex;
@@ -2952,6 +3015,12 @@ function initSystemMetricsChart() {
     <section class="architecture-section">
       <h2 class="section-title">How Algo Trading Works</h2>
       <p class="section-subtitle">Enterprise-grade architecture powering automated trading with intelligent automation</p>
+      
+      <a href="https://trade.trademetrix.tech" target="_blank" rel="noopener noreferrer" class="algo-platform-cta">
+        <span class="algo-platform-cta-icon">🚀</span>
+        <span>Launch Algo Trading Platform</span>
+        <span class="algo-platform-cta-icon">→</span>
+      </a>
       
       <div class="arch-diagram">
         <div class="arch-flow">
