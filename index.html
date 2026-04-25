@@ -3662,15 +3662,14 @@ function initPerformanceChart() {
 // Intersection Observer for scroll animations
 function initScrollAnimations() {
   const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.05,
+    rootMargin: '0px 0px 0px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
-        console.log('[v0] Element animated:', entry.target.className);
         observer.unobserve(entry.target);
       }
     });
@@ -3679,12 +3678,17 @@ function initScrollAnimations() {
   // Observe all scroll-animate elements
   const selectors = '.card, .stat-card, .process-step, .faq-item, .roadmap-item, .arch-box, .metric-card, .spec-item, .breakdown-item, .flow-step, .phase-item, .comparison-item, .bar-item, .metric-compare, .comparison-chart-container, .advantage-highlight, .algo-platform-cta, .pricing-section, .roadmap-feature, .details-list li';
   const elements = document.querySelectorAll(selectors);
-  console.log('[v0] Found ' + elements.length + ' elements to animate');
   
   elements.forEach(el => {
     if (!el.classList.contains('in-view')) {
-      el.classList.add('scroll-animate');
       observer.observe(el);
+      
+      // Check if element is already in viewport (for elements above fold)
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('in-view');
+        observer.unobserve(el);
+      }
     }
   });
 
