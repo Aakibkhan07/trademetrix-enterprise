@@ -1771,8 +1771,9 @@ function initPerformanceChart() {
     }
 
     if (progress < 1) {
-      animationFrame = requestAnimationFrame(() => {
-        drawChart(Math.min(1, animationFrame / totalFrames + 1 / totalFrames));
+      animationFrame++;
+      requestAnimationFrame(() => {
+        drawChart(Math.min(1, animationFrame / totalFrames));
       });
     }
   }
@@ -1784,7 +1785,8 @@ function initPerformanceChart() {
   window.addEventListener('resize', () => {
     const newRect = canvas.getBoundingClientRect();
     if (newRect.width !== canvas.width) {
-      drawChart(1);
+      animationFrame = 0;
+      drawChart(0);
     }
   });
 }
@@ -1825,7 +1827,7 @@ function initComparisonChart() {
   const chartHeight = canvas.height - (padding * 2);
   const pointSpacing = chartWidth / months;
 
-  let animationFrame = 0;
+  let frameCount = 0;
   const totalFrames = 120;
 
   function drawChart(progress) {
@@ -1899,8 +1901,9 @@ function initComparisonChart() {
     ctx.fillText('Compound', padding + 170, padding + 20);
 
     if (progress < 1) {
-      animationFrame = requestAnimationFrame(() => {
-        drawChart(Math.min(1, animationFrame / totalFrames + 1 / totalFrames));
+      frameCount++;
+      requestAnimationFrame(() => {
+        drawChart(Math.min(1, frameCount / totalFrames));
       });
     }
   }
@@ -1928,7 +1931,7 @@ function initSystemMetricsChart() {
   const barHeight = canvas.height / metrics.length;
   const padding = 40;
 
-  let animationFrame = 0;
+  let frameCount = 0;
   const totalFrames = 100;
 
   function drawChart(progress) {
@@ -1965,8 +1968,9 @@ function initSystemMetricsChart() {
     });
 
     if (progress < 1) {
-      animationFrame = requestAnimationFrame(() => {
-        drawChart(Math.min(1, animationFrame / totalFrames + 1 / totalFrames));
+      frameCount++;
+      requestAnimationFrame(() => {
+        drawChart(Math.min(1, frameCount / totalFrames));
       });
     }
   }
