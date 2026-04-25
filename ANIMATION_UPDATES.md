@@ -126,12 +126,90 @@ The entire website has been enhanced with comprehensive CSS-only animations feat
 - Graceful degradation for non-supporting browsers
 - No JavaScript required for visual animations (Intersection Observer is progressive enhancement)
 
+## Middle Section Animations (Comprehensive Update)
+
+### Breakdown Items
+- Scale-in entrance animation with staggered delays
+- Gradient overlay on hover with radial glow effect
+- Transform: translateY(-8px) scale(1.02)
+- Enhanced box-shadow with multiple layers
+- Value animations with gradient backgrounds and size increases
+
+### Phase Items (Investment Analysis)
+- Slide-in from left with smooth transitions
+- Enhanced border animations with gradient overlays
+- Phase number with separate scale and rotate animations
+- Phase content with staggered fade-in
+- Hover effects: border color, background, transform, shadow
+- Title and description color transitions on hover
+
+### Comparison Items (Simple vs Compound Interest)
+- Fade-in animations with scale-in effects
+- Radial overlay pseudo-elements on hover
+- Different animations for simple (orange) vs compound (green) items
+- Value animations with gradient text and font-size increases
+- Label and detail color transitions
+- Shadow expansion on hover
+
+### Advantage Highlight (Compound Interest Advantage)
+- Dual animation: fadeUp + scaleIn on scroll
+- Enhanced hover effects with border color change
+- Scale to 1.02x with -6px lift on hover
+- Label color transition to accent color
+- Value with gradient background animation
+- Advanced glow effect with multiple shadow layers
+
+### Algo Platform CTA Button
+- Slide-up animation on entry
+- Enhanced hover with scale(1.02) and lift(-6px)
+- Dual pseudo-element effects:
+  - ::before: Gradient background opacity increase
+  - ::after: Radial glow with pulse animation
+- Active state with reduced transforms
+- Advanced shadow effects with inset highlights
+
+### Details List Items
+- Staggered slide-in from left with delays (0.1s increments)
+- Bottom underline animation that reveals on hover
+- Smooth transitions for color and transform
+- Bullet point (::before) with scale and color animation
+- Hover effects: color change, translateX(10px)
+
+### Interest Comparison Section
+- Staggered fade-up animations
+- Arrows with bounce animation (1.5s ease-in-out)
+- Hover effects: color change to accent, font-size increase, rotation
+- 3D rotation effect on arrow hover
+
+### Pricing Section
+- Shimmer top border animation (3s infinite)
+- Radial gradient overlay on hover
+- Enhanced borders with cyan accent color transition
+- Enhanced shadow with multiple layers
+- Price tag with gradient animation and size increases
+- Price note color transitions on hover
+
+### Metric Cards (Secondary - Performance Metrics)
+- Improved from 0.6s fade-up with 0.1s-0.25s staggered delays
+- Enhanced ::after pseudo-element with radial gradient
+- Shimmer ::before animation that moves left-to-right
+- Hover transforms: translateY(-8px) scale(1.02)
+- Enhanced shadows with cyan accent layers
+- Metric value animations with gradient backgrounds
+
+### Comparison Items Details
+- Comparison labels: fade-up at 0.2s delay
+- Comparison values: gradient backgrounds with countUp animation
+- Font-size increases on hover (20px → 22px)
+- Label and detail color changes to primary text
+
 ## File Statistics
-- **Total animations**: 82+ throughout the site
+- **Total animations**: 107+ throughout the site
 - **Keyframe definitions**: 32 unique @keyframes
-- **CSS animation properties**: Applied to 50+ elements
+- **CSS animation properties**: Applied to 70+ elements
 - **JavaScript enhancement**: Intersection Observer for scroll triggers + counter animations
-- **Lines added**: ~500 lines of new animation CSS and JavaScript
+- **Lines added**: ~800 lines of new animation CSS and JavaScript
+- **Middle section animations**: 15+ unique animated element types
 
 ## Testing Recommendations
 1. Test hover states on all interactive elements

@@ -970,7 +970,40 @@ h2 {
   border: 1px solid var(--border-color);
   border-radius: 16px;
   margin: 120px 0;
-  animation: fadeUp 1s ease 0.4s both;
+  animation: fadeUp 0.6s ease 0.2s both;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pricing-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--success), var(--accent), transparent);
+  animation: shimmer 3s infinite;
+}
+
+.pricing-section::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(circle at center, rgba(0, 212, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.pricing-section:hover::after {
+  opacity: 1;
+}
+
+.pricing-section:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 24px 72px rgba(0, 102, 255, 0.15), 0 0 40px rgba(0, 212, 255, 0.1);
 }
 
 .price-tag {
@@ -979,15 +1012,29 @@ h2 {
   font-weight: 800;
   margin: 24px 0;
   background: linear-gradient(135deg, var(--success), var(--accent));
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.3s both, countUp 0.6s ease 0.3s both;
+}
+
+.pricing-section:hover .price-tag {
+  font-size: 62px;
+  animation: gradientText 2s ease infinite;
 }
 
 .price-note {
   color: var(--text-secondary);
   font-size: 15px;
   margin-bottom: 40px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.4s both;
+}
+
+.pricing-section:hover .price-note {
+  color: var(--accent);
 }
 
 .roadmap-section {
@@ -1497,19 +1544,52 @@ footer strong {
   background: rgba(0, 102, 255, 0.06);
   border-left: 3px solid var(--primary);
   border-radius: 8px;
-  transition: all 0.3s;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   animation: slideInLeft 0.5s ease both;
+  position: relative;
+  overflow: hidden;
 }
 
-.phase-item:nth-child(1) { animation-delay: 0.2s; }
-.phase-item:nth-child(2) { animation-delay: 0.3s; }
-.phase-item:nth-child(3) { animation-delay: 0.4s; }
-.phase-item:nth-child(4) { animation-delay: 0.5s; }
+.phase-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.phase-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.phase-item:nth-child(1) { animation-delay: 0.1s; }
+.phase-item:nth-child(2) { animation-delay: 0.15s; }
+.phase-item:nth-child(3) { animation-delay: 0.2s; }
+.phase-item:nth-child(4) { animation-delay: 0.25s; }
+
+.phase-item:hover::before {
+  opacity: 1;
+}
+
+.phase-item:hover::after {
+  opacity: 1;
+}
 
 .phase-item:hover {
   background: rgba(0, 102, 255, 0.12);
   border-left-color: var(--accent);
-  transform: translateX(6px);
+  transform: translateX(8px);
+  box-shadow: 0 8px 24px rgba(0, 102, 255, 0.15);
 }
 
 .phase-number {
@@ -1525,12 +1605,28 @@ footer strong {
   color: white;
   font-size: 16px;
   flex-shrink: 0;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+  animation: scaleIn 0.6s ease backwards;
+}
+
+.phase-item:nth-child(1) .phase-number { animation-delay: 0.15s; }
+.phase-item:nth-child(2) .phase-number { animation-delay: 0.2s; }
+.phase-item:nth-child(3) .phase-number { animation-delay: 0.25s; }
+.phase-item:nth-child(4) .phase-number { animation-delay: 0.3s; }
+
+.phase-item:hover .phase-number {
+  transform: scale(1.2) rotate(-10deg);
+  box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+  animation: pulse 0.6s ease-in-out;
 }
 
 .phase-content {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.1s both;
 }
 
 .phase-title {
@@ -1538,12 +1634,22 @@ footer strong {
   font-size: 13px;
   font-weight: 700;
   color: var(--accent);
+  transition: color 0.35s ease;
+}
+
+.phase-item:hover .phase-title {
+  color: var(--success);
 }
 
 .phase-description {
   font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.4;
+  transition: color 0.35s ease;
+}
+
+.phase-item:hover .phase-description {
+  color: var(--text-primary);
 }
 
   .phase-multiplier {
@@ -1573,7 +1679,7 @@ footer strong {
     font-size: 14px;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     overflow: hidden;
     margin-top: 24px;
@@ -1586,19 +1692,38 @@ footer strong {
     inset: 0;
     background: linear-gradient(135deg, var(--success), var(--accent));
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.35s;
     z-index: -1;
   }
 
+  .algo-platform-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 255, 127, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.35s;
+    z-index: 0;
+  }
+
   .algo-platform-cta:hover::before {
-    opacity: 0.1;
+    opacity: 0.15;
+  }
+
+  .algo-platform-cta:hover::after {
+    opacity: 1;
+    animation: pulse 1s ease infinite;
   }
 
   .algo-platform-cta:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(0, 255, 127, 0.3), 0 0 32px rgba(0, 212, 255, 0.2);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 255, 127, 0.4), 0 0 40px rgba(0, 212, 255, 0.25), inset 0 1px 0 rgba(255,255,255,0.2);
     border-color: var(--accent);
     color: var(--accent);
+  }
+
+  .algo-platform-cta:active {
+    transform: translateY(-3px) scale(1.01);
   }
 
   .algo-platform-cta span {
@@ -1614,7 +1739,21 @@ footer strong {
   align-items: center;
   gap: 12px;
   margin-bottom: 16px;
-  animation: fadeUp 0.6s ease both;
+  animation: fadeUp 0.6s ease 0.1s both;
+  position: relative;
+}
+
+.comparison-arrow {
+  font-size: 24px;
+  color: var(--success);
+  animation: bounce 1.5s ease-in-out infinite;
+  transition: all 0.35s ease;
+}
+
+.interest-comparison:hover .comparison-arrow {
+  color: var(--accent);
+  animation: bounce 1s ease-in-out infinite, rotate3d 2s ease infinite;
+  font-size: 28px;
 }
 
 .comparison-item {
@@ -1622,27 +1761,50 @@ footer strong {
   padding: 16px;
   border-radius: 10px;
   text-align: center;
-  transition: all 0.3s;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.comparison-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.comparison-item:hover::before {
+  opacity: 1;
 }
 
 .comparison-item.simple {
   background: rgba(255, 107, 53, 0.1);
   border: 1px solid rgba(255, 107, 53, 0.3);
+  animation-delay: 0.1s;
 }
 
 .comparison-item.simple:hover {
   background: rgba(255, 107, 53, 0.15);
-  border-color: rgba(255, 107, 53, 0.5);
+  border-color: rgba(255, 107, 53, 0.8);
+  transform: scale(1.03) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(255, 107, 53, 0.25);
 }
 
 .comparison-item.compound {
   background: linear-gradient(135deg, rgba(0, 255, 127, 0.12), rgba(0, 212, 255, 0.08));
   border: 1px solid rgba(0, 212, 255, 0.3);
+  animation-delay: 0.15s;
 }
 
 .comparison-item.compound:hover {
   background: linear-gradient(135deg, rgba(0, 255, 127, 0.18), rgba(0, 212, 255, 0.12));
   border-color: var(--accent);
+  transform: scale(1.03) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 212, 255, 0.25);
 }
 
 .comparison-label {
@@ -1652,19 +1814,39 @@ footer strong {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 6px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.2s both;
 }
 
 .comparison-value {
   font-family: 'Sora', sans-serif;
   font-size: 20px;
   font-weight: 800;
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--success));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 4px;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.25s both, countUp 0.6s ease 0.25s both;
+}
+
+.comparison-item:hover .comparison-value {
+  font-size: 22px;
+  animation: gradientText 2s ease infinite;
 }
 
 .comparison-detail {
   font-size: 11px;
   color: var(--text-secondary);
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.comparison-item:hover .comparison-label,
+.comparison-item:hover .comparison-detail {
+  color: var(--text-primary);
 }
 
 .comparison-arrow {
@@ -1679,7 +1861,30 @@ footer strong {
   border: 2px solid var(--success);
   border-radius: 10px;
   text-align: center;
-  animation: fadeUp 0.6s ease 0.3s both;
+  animation: fadeUp 0.6s ease 0.2s both, scaleIn 0.6s ease 0.2s both;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.advantage-highlight::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, rgba(0, 255, 127, 0.2), rgba(0, 212, 255, 0.15));
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.advantage-highlight:hover::before {
+  opacity: 1;
+}
+
+.advantage-highlight:hover {
+  border-color: var(--accent);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 255, 127, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
 }
 
 .advantage-label {
@@ -1689,13 +1894,30 @@ footer strong {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+
+.advantage-highlight:hover .advantage-label {
+  color: var(--accent);
 }
 
 .advantage-value {
   font-family: 'Sora', sans-serif;
   font-size: 28px;
   font-weight: 800;
-  color: var(--success);
+  background: linear-gradient(135deg, var(--success), var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.35s both, countUp 0.6s ease 0.35s both;
+}
+
+.advantage-highlight:hover .advantage-value {
+  font-size: 32px;
+  animation: gradientText 2s ease infinite;
 }
 
 @media (max-width: 768px) {
@@ -1821,8 +2043,8 @@ footer strong {
   background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  transition: all 0.3s;
-  animation: fadeUp 0.8s ease both;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
   position: relative;
   overflow: hidden;
 }
@@ -1835,22 +2057,36 @@ footer strong {
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
-  transition: left 0.5s;
+  transition: left 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.metric-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
 }
 
 .metric-card:hover::before {
   left: 100%;
 }
 
-.metric-card:nth-child(1) { animation-delay: 0.5s; }
-.metric-card:nth-child(2) { animation-delay: 0.6s; }
-.metric-card:nth-child(3) { animation-delay: 0.7s; }
-.metric-card:nth-child(4) { animation-delay: 0.8s; }
+.metric-card:hover::after {
+  opacity: 1;
+}
+
+.metric-card:nth-child(1) { animation-delay: 0.1s; }
+.metric-card:nth-child(2) { animation-delay: 0.15s; }
+.metric-card:nth-child(3) { animation-delay: 0.2s; }
+.metric-card:nth-child(4) { animation-delay: 0.25s; }
 
 .metric-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--primary);
-  box-shadow: 0 16px 40px rgba(0, 102, 255, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 20px 48px rgba(0, 102, 255, 0.25), 0 0 30px rgba(0, 212, 255, 0.15);
 }
 
 .metric-label {
@@ -1867,10 +2103,18 @@ footer strong {
   font-size: 28px;
   font-weight: 800;
   background: linear-gradient(135deg, var(--success), var(--accent));
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 8px;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.1s both, countUp 0.6s ease 0.1s both;
+}
+
+.metric-card:hover .metric-value {
+  font-size: 32px;
+  animation: gradientText 2s ease infinite;
 }
 
 .metric-description {
@@ -1924,16 +2168,39 @@ footer strong {
   align-items: flex-start;
   gap: 10px;
   border-bottom: 1px solid rgba(26, 40, 71, 0.3);
-  transition: all 0.3s;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  animation: slideInLeft 0.5s ease both;
+}
+
+.details-list li:nth-child(1) { animation-delay: 0.1s; }
+.details-list li:nth-child(2) { animation-delay: 0.15s; }
+.details-list li:nth-child(3) { animation-delay: 0.2s; }
+.details-list li:nth-child(4) { animation-delay: 0.25s; }
+.details-list li:nth-child(5) { animation-delay: 0.3s; }
+
+.details-list li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--success), var(--accent));
+  transition: width 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .details-list li:last-child {
   border-bottom: none;
 }
 
+.details-list li:hover::after {
+  width: 100%;
+}
+
 .details-list li:hover {
   color: var(--accent);
-  transform: translateX(8px);
+  transform: translateX(10px);
 }
 
 .details-list li::before {
@@ -1942,6 +2209,12 @@ footer strong {
   font-weight: 700;
   flex-shrink: 0;
   font-size: 14px;
+  transition: all 0.35s ease;
+}
+
+.details-list li:hover::before {
+  color: var(--accent);
+  transform: scale(1.3);
 }
 
 .compound-breakdown {
@@ -1960,15 +2233,54 @@ footer strong {
   border: 1px solid rgba(0, 102, 255, 0.2);
   border-radius: 10px;
   text-align: center;
-  transition: all 0.3s;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
+  animation: scaleIn 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.breakdown-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 102, 255, 0.1));
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.breakdown-item::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.breakdown-item:nth-child(1) { animation-delay: 0.05s; }
+.breakdown-item:nth-child(2) { animation-delay: 0.1s; }
+.breakdown-item:nth-child(3) { animation-delay: 0.15s; }
+.breakdown-item:nth-child(4) { animation-delay: 0.2s; }
+
+.breakdown-item:hover::before {
+  opacity: 1;
+}
+
+.breakdown-item:hover::after {
+  opacity: 1;
 }
 
 .breakdown-item:hover {
   border-color: var(--accent);
   background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 102, 255, 0.08));
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 212, 255, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 212, 255, 0.25), 0 0 30px rgba(0, 102, 255, 0.15);
 }
 
 .breakdown-label {
@@ -1978,14 +2290,31 @@ footer strong {
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.1s both;
 }
 
 .breakdown-value {
   font-family: 'Sora', sans-serif;
   font-size: 20px;
   font-weight: 800;
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--success));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   display: block;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.15s both;
+}
+
+.breakdown-item:hover .breakdown-label {
+  color: var(--accent);
+  animation: gradientText 2s ease infinite;
+}
+
+.breakdown-item:hover .breakdown-value {
+  font-size: 22px;
 }
 
 @media (max-width: 768px) {
