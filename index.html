@@ -752,7 +752,7 @@ h1 {
   border: 1px solid var(--border-color);
   border-radius: 14px;
   padding: 36px;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -760,7 +760,8 @@ h1 {
 }
 
 .card.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card:nth-child(1) { animation-delay: 0.05s; }
@@ -900,13 +901,14 @@ h2 {
   border: 1px solid var(--border-color);
   border-radius: 14px;
   text-align: center;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
   opacity: 0;
   transform: translateY(50px);
 }
 
 .process-step.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .process-step::before {
@@ -1169,7 +1171,7 @@ h2 {
   background: linear-gradient(135deg, rgba(20, 27, 53, 0.4), rgba(20, 27, 53, 0.2));
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -1178,7 +1180,8 @@ h2 {
 }
 
 .faq-item.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .faq-item::before {
@@ -2570,7 +2573,7 @@ footer strong {
   background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -2578,7 +2581,8 @@ footer strong {
 }
 
 .spec-item.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .spec-item::before {
@@ -2845,7 +2849,7 @@ footer strong {
   background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
   position: relative;
   min-height: 100px;
   display: flex;
@@ -2858,7 +2862,8 @@ footer strong {
 }
 
 .arch-box.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .arch-box::before {
@@ -2984,7 +2989,7 @@ footer strong {
   background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -2992,7 +2997,8 @@ footer strong {
 }
 
 .comparison-chart-container.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .comparison-chart-container::before {
@@ -3208,7 +3214,7 @@ footer strong {
   grid-template-columns: 50px 1fr;
   gap: 20px;
   align-items: start;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -3216,7 +3222,8 @@ footer strong {
 }
 
 .flow-step.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .flow-step::before {
@@ -3364,7 +3371,7 @@ footer strong {
   border: 1px solid var(--border-color);
   border-radius: 10px;
   text-align: center;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
   position: relative;
   overflow: hidden;
   opacity: 0;
@@ -3372,7 +3379,8 @@ footer strong {
 }
 
 .metric-compare.in-view {
-  animation: fadeUp 0.6s ease forwards;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .metric-compare::before {
@@ -3662,33 +3670,29 @@ function initPerformanceChart() {
 // Intersection Observer for scroll animations
 function initScrollAnimations() {
   const observerOptions = {
-    threshold: 0.05,
-    rootMargin: '0px 0px 0px 0px'
+    threshold: 0.1,
+    rootMargin: '100px'
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  // Observe all scroll-animate elements
+  // Observe all animated elements
   const selectors = '.card, .stat-card, .process-step, .faq-item, .roadmap-item, .arch-box, .metric-card, .spec-item, .breakdown-item, .flow-step, .phase-item, .comparison-item, .bar-item, .metric-compare, .comparison-chart-container, .advantage-highlight, .algo-platform-cta, .pricing-section, .roadmap-feature, .details-list li';
   const elements = document.querySelectorAll(selectors);
   
   elements.forEach(el => {
-    if (!el.classList.contains('in-view')) {
-      observer.observe(el);
-      
-      // Check if element is already in viewport (for elements above fold)
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
-        el.classList.add('in-view');
-        observer.unobserve(el);
-      }
+    observer.observe(el);
+    
+    // Immediately check if element is already in viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      el.classList.add('in-view');
     }
   });
 
