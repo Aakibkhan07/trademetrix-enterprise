@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Enterprise Algorithmic Trading Solution - Automate your trading with AI-powered precision">
-<title>Trade Metrix Enterprise</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Trade Metrix Enterprise - AI-Powered Algorithmic Trading</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -18,6 +18,7 @@
   --primary: #0066ff;
   --accent: #00d4ff;
   --success: #00ff7f;
+  --warning: #ff6b35;
   --dark-bg: #0a0e27;
   --dark-card: #141b35;
   --border-color: #1a2847;
@@ -69,6 +70,59 @@ body::after {
   100% { transform: translate(150px, 150px); }
 }
 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 102, 255, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(0, 102, 255, 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -93,12 +147,18 @@ header {
 
 .logo {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.5px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: slideInLeft 0.6s ease;
+}
+
+nav {
+  display: flex;
+  gap: 0;
 }
 
 nav a {
@@ -106,25 +166,45 @@ nav a {
   text-decoration: none;
   font-size: 14px;
   margin-left: 30px;
-  transition: color 0.3s;
+  transition: all 0.3s;
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.3s;
 }
 
 nav a:hover {
   color: var(--accent);
 }
 
+nav a:hover::after {
+  width: 100%;
+}
+
 .hero {
-  padding: 80px 0 60px;
+  padding: 100px 0 80px;
   text-align: center;
+}
+
+.hero-content {
+  animation: fadeUp 0.8s ease;
 }
 
 h1 {
   font-family: 'Sora', sans-serif;
-  font-size: clamp(32px, 8vw, 56px);
+  font-size: clamp(36px, 8vw, 60px);
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 20px;
-  letter-spacing: -1px;
+  margin-bottom: 24px;
+  letter-spacing: -1.5px;
   background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -134,48 +214,171 @@ h1 {
 .subtitle {
   font-size: 18px;
   color: var(--text-secondary);
-  margin-bottom: 40px;
-  max-width: 600px;
+  margin-bottom: 50px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.8;
 }
 
-.fade {
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(0, 255, 127, 0.1);
+  border: 1px solid var(--success);
+  color: var(--success);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: linear-gradient(135deg, var(--primary), #0052cc);
+  color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 102, 255, 0.2);
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.5), transparent);
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 0.8s ease forwards;
+  transition: opacity 0.3s;
 }
 
-.fade:nth-child(1) { animation-delay: 0.1s; }
-.fade:nth-child(2) { animation-delay: 0.25s; }
-.fade:nth-child(3) { animation-delay: 0.4s; }
-.fade:nth-child(4) { animation-delay: 0.55s; }
-.fade:nth-child(5) { animation-delay: 0.7s; }
-.fade:nth-child(6) { animation-delay: 0.85s; }
+.cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+  transform: translateX(-100%);
+  transition: transform 0.6s;
+}
 
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 102, 255, 0.4);
+}
+
+.cta:hover::after {
+  transform: translateX(100%);
+}
+
+.cta:active {
+  transform: translateY(-2px);
+}
+
+.cta.secondary {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  box-shadow: none;
+}
+
+.cta.secondary:hover {
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 212, 255, 0.3);
+}
+
+.stats-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  margin: 120px 0;
+  padding: 60px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  animation: fadeUp 1s ease 0.4s both;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-value {
+  font-family: 'Sora', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--success), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.section-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 120px;
+  letter-spacing: -1px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 60px;
+  font-size: 16px;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-  margin: 80px 0;
+  gap: 28px;
+  margin: 80px 0 120px;
 }
 
 .card {
-  background: rgba(20, 27, 53, 0.4);
+  background: linear-gradient(135deg, rgba(20, 27, 53, 0.4), rgba(20, 27, 53, 0.2));
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 32px;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  border-radius: 14px;
+  padding: 36px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
+  animation: fadeUp 0.8s ease both;
 }
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
 
 .card::before {
   content: "";
@@ -183,7 +386,7 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 3px;
   background: linear-gradient(90deg, transparent, var(--primary), transparent);
   opacity: 0;
   transition: opacity 0.3s;
@@ -194,16 +397,21 @@ h1 {
 }
 
 .card:hover {
-  border-color: var(--primary);
-  background: rgba(20, 27, 53, 0.8);
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 102, 255, 0.1);
+  border-color: rgba(0, 102, 255, 0.5);
+  background: linear-gradient(135deg, rgba(20, 27, 53, 0.8), rgba(20, 27, 53, 0.5));
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 24px 64px rgba(0, 102, 255, 0.15);
 }
 
 .card-icon {
-  font-size: 32px;
+  font-size: 40px;
   margin-bottom: 16px;
   display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.card:hover .card-icon {
+  animation: pulse 0.6s ease-in-out;
 }
 
 h2 {
@@ -228,7 +436,7 @@ h2 {
 }
 
 .feature-list li {
-  padding: 10px 0;
+  padding: 12px 0;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
@@ -243,30 +451,88 @@ h2 {
 
 .feature-list li:hover {
   color: var(--accent);
-  transform: translateX(6px);
+  transform: translateX(8px);
 }
 
 .feature-list li::before {
-  content: "→";
+  content: "✓";
   display: inline-block;
   margin-right: 12px;
-  color: var(--primary);
-  font-weight: 600;
+  color: var(--success);
+  font-weight: 700;
+}
+
+.how-it-works {
+  margin: 120px 0;
+}
+
+.process-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  margin-top: 60px;
+}
+
+.process-step {
+  position: relative;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  text-align: center;
+  animation: fadeUp 0.8s ease both;
+}
+
+.process-step:nth-child(1) { animation-delay: 0.1s; }
+.process-step:nth-child(2) { animation-delay: 0.2s; }
+.process-step:nth-child(3) { animation-delay: 0.3s; }
+.process-step:nth-child(4) { animation-delay: 0.4s; }
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  margin: 0 auto 16px;
+  box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3);
+}
+
+.process-step h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.process-step p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 .pricing-section {
   text-align: center;
-  padding: 60px 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  margin: 80px 0;
+  padding: 80px 60px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  margin: 120px 0;
+  animation: fadeUp 1s ease 0.4s both;
 }
 
 .price-tag {
   font-family: 'Sora', sans-serif;
-  font-size: 48px;
+  font-size: 56px;
   font-weight: 800;
-  margin: 20px 0;
+  margin: 24px 0;
   background: linear-gradient(135deg, var(--success), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -275,90 +541,155 @@ h2 {
 
 .price-note {
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 40px;
 }
 
-.button-group {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
+.roadmap-section {
+  margin: 120px 0;
 }
 
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
-  background: linear-gradient(135deg, var(--primary), #0052cc);
-  color: white;
-  font-weight: 600;
-  border-radius: 8px;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  font-size: 15px;
-  transition: all 0.3s;
+.roadmap-timeline {
   position: relative;
-  overflow: hidden;
-  font-family: 'Inter', sans-serif;
+  padding: 40px 0;
 }
 
-.cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
-  transform: translateX(-100%);
-  transition: transform 0.5s;
-  z-index: 1;
+.roadmap-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  align-items: center;
+  animation: fadeUp 0.8s ease both;
 }
 
-.cta:hover::before {
-  transform: translateX(100%);
+.roadmap-item:nth-child(1) { animation-delay: 0.1s; }
+.roadmap-item:nth-child(2) { animation-delay: 0.2s; }
+.roadmap-item:nth-child(3) { animation-delay: 0.3s; }
+
+.roadmap-item:nth-child(even) {
+  direction: rtl;
 }
 
-.cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 102, 255, 0.3);
+.roadmap-item:nth-child(even) > * {
+  direction: ltr;
 }
 
-.cta.secondary {
-  background: transparent;
-  border: 1.5px solid var(--accent);
+.roadmap-date {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.roadmap-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.roadmap-feature {
+  padding: 16px;
+  background: rgba(0, 102, 255, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: all 0.3s;
+}
+
+.roadmap-feature:hover {
+  background: rgba(0, 102, 255, 0.12);
+  transform: translateX(8px);
+}
+
+.roadmap-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(0, 255, 127, 0.2);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--success);
+  white-space: nowrap;
+  margin-bottom: 8px;
+}
+
+.roadmap-badge.planned {
+  background: rgba(255, 107, 53, 0.2);
+  color: var(--warning);
+}
+
+.roadmap-badge.beta {
+  background: rgba(0, 212, 255, 0.2);
   color: var(--accent);
 }
 
-.cta.secondary:hover {
-  background: rgba(0, 212, 255, 0.1);
-  box-shadow: 0 12px 40px rgba(0, 212, 255, 0.2);
+.faq-section {
+  margin: 120px 0;
 }
 
-.section-title {
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 24px;
+  margin-top: 60px;
+}
+
+.faq-item {
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(20, 27, 53, 0.4), rgba(20, 27, 53, 0.2));
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  transition: all 0.3s;
+  animation: fadeUp 0.8s ease both;
+  cursor: pointer;
+}
+
+.faq-item:nth-child(1) { animation-delay: 0.1s; }
+.faq-item:nth-child(2) { animation-delay: 0.2s; }
+.faq-item:nth-child(3) { animation-delay: 0.3s; }
+.faq-item:nth-child(4) { animation-delay: 0.4s; }
+.faq-item:nth-child(5) { animation-delay: 0.5s; }
+.faq-item:nth-child(6) { animation-delay: 0.6s; }
+
+.faq-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 102, 255, 0.1);
+}
+
+.faq-question {
   font-family: 'Sora', sans-serif;
-  font-size: 36px;
   font-weight: 700;
-  text-align: center;
-  margin-bottom: 60px;
-  margin-top: 80px;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
-.cta-content {
-  position: relative;
-  z-index: 2;
+.faq-answer {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 footer {
   text-align: center;
-  padding: 60px 0 40px;
+  padding: 80px 0 40px;
   border-top: 1px solid var(--border-color);
   color: var(--text-secondary);
   font-size: 14px;
+  animation: fadeUp 0.8s ease 0.5s both;
 }
 
 footer p {
-  margin: 8px 0;
+  margin: 12px 0;
+}
+
+footer strong {
+  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {
@@ -373,18 +704,29 @@ footer p {
 
   nav {
     width: 100%;
+    justify-content: center;
+    gap: 16px;
   }
 
   nav a {
-    margin: 0 15px;
+    margin: 0;
   }
 
   h1 {
     font-size: 32px;
   }
 
+  .section-title {
+    font-size: 32px;
+  }
+
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-section {
+    grid-template-columns: 1fr;
+    padding: 40px;
   }
 
   .button-group {
@@ -395,6 +737,23 @@ footer p {
     width: 100%;
     justify-content: center;
   }
+
+  .roadmap-item {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .roadmap-item:nth-child(even) {
+    direction: ltr;
+  }
+
+  .process-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
@@ -404,11 +763,12 @@ footer p {
 <header>
   <div class="container">
     <div class="header-content">
-      <div class="logo">TRADEMETRIX</div>
+      <div class="logo">◆ TRADEMETRIX</div>
       <nav>
         <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
+        <a href="#how">How It Works</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#faq">FAQ</a>
       </nav>
     </div>
   </div>
@@ -416,88 +776,335 @@ footer p {
 
 <main>
   <div class="container">
-    <section class="hero fade">
-      <h1>Enterprise Algo Trading, Simplified</h1>
-      <p class="subtitle">Automate your trading with AI-powered precision. Zero emotions, maximum returns.</p>
-      <div class="button-group">
-        <a href="#" class="cta">
-          <span class="cta-content">Get Started</span>
-        </a>
-        <a href="#features" class="cta secondary">
-          <span class="cta-content">Learn More</span>
-        </a>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="badge">🚀 AI-Powered Trading Revolution</div>
+        <h1>Enterprise Algo Trading, Simplified</h1>
+        <p class="subtitle">Automate your trading with AI-powered precision. Trade 24/7 without emotions, maximize returns, and scale without limits. Enterprise-grade automation meets zero-manual-intervention.</p>
+        <div class="button-group">
+          <a href="https://wa.me/917415660385?text=Hi%20Trade%20Metrix%2C%20I%20want%20to%20get%20started%20with%20your%20algorithmic%20trading%20solution" target="_blank" rel="noopener noreferrer" class="cta">
+            <span>Get Started via WhatsApp</span>
+            <span>→</span>
+          </a>
+          <a href="#features" class="cta secondary">
+            <span>Explore Features</span>
+          </a>
+        </div>
       </div>
     </section>
 
+    <!-- Statistics Section -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <div class="stat-value">10M+</div>
+        <div class="stat-label">Daily Trade Volume Processed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">99.9%</div>
+        <div class="stat-label">Uptime & Reliability</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">&lt;1ms</div>
+        <div class="stat-label">Trade Execution Latency</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">500+</div>
+        <div class="stat-label">Active Trading Strategies</div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
     <section id="features">
-      <h2 class="section-title fade">Why Choose Trade Metrix?</h2>
+      <h2 class="section-title">Why Choose Trade Metrix?</h2>
+      <p class="section-subtitle">Industry-leading features designed for serious traders and institutions</p>
       
       <div class="features-grid">
-        <div class="card fade">
+        <div class="card">
           <div class="card-icon">⚡</div>
-          <h2>Automate Everything</h2>
-          <p>Trade without emotion. Execute with precision. Scale without limits.</p>
-        </div>
-
-        <div class="card fade">
-          <div class="card-icon">🎯</div>
-          <h2>Core Features</h2>
+          <h2>Fully Automated</h2>
+          <p>Trade without emotion. Execute with precision. Scale without manual intervention.</p>
           <ul class="feature-list">
             <li>Fully Automated Execution</li>
-            <li>Zero Manual Interface</li>
-            <li>Ultra-Low Latency</li>
-            <li>Real-Time Data Processing</li>
+            <li>Zero Manual Interface Required</li>
+            <li>24/7 Unattended Trading</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h2>Core Features</h2>
+          <p>Powerful tools built for performance</p>
+          <ul class="feature-list">
+            <li>Ultra-Low Latency Processing</li>
+            <li>Real-Time Data Streaming</li>
             <li>Advanced Risk Management</li>
-            <li>Multi-Account Handling</li>
+            <li>Multi-Exchange Support</li>
+            <li>Multi-Account Management</li>
           </ul>
         </div>
 
-        <div class="card fade">
+        <div class="card">
           <div class="card-icon">🚀</div>
-          <h2>Advanced Upgrades</h2>
+          <h2>Premium Upgrades</h2>
+          <p>Take your trading to the next level</p>
           <ul class="feature-list">
-            <li>AI Trade Filtering</li>
+            <li>AI Trade Filtering & Signals</li>
             <li>Portfolio Risk Engine</li>
-            <li>Custom Strategy Dev</li>
-            <li>Trade Copier</li>
-            <li>Analytics Dashboard</li>
+            <li>Custom Strategy Development</li>
+            <li>Live Trade Copier</li>
+            <li>Advanced Analytics Dashboard</li>
           </ul>
         </div>
 
-        <div class="card fade">
-          <div class="card-icon">🔮</div>
-          <h2>Future Capabilities</h2>
+        <div class="card">
+          <div class="card-icon">🔐</div>
+          <h2>Security & Compliance</h2>
+          <p>Enterprise-grade security standards</p>
           <ul class="feature-list">
-            <li>Auto Hedging</li>
-            <li>Dynamic Position Sizing</li>
-            <li>Event-Based Trading</li>
-            <li>Latency Monitoring</li>
+            <li>End-to-End Encryption</li>
+            <li>Bank-Level Security</li>
+            <li>Audit Logs & Compliance</li>
+            <li>API Rate Limiting</li>
+            <li>DDoS Protection</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h2>Analytics & Reporting</h2>
+          <p>Deep insights into your trading performance</p>
+          <ul class="feature-list">
+            <li>Real-Time Performance Metrics</li>
+            <li>Drawdown Analysis</li>
+            <li>Sharpe Ratio Calculations</li>
+            <li>Monthly PDF Reports</li>
+            <li>Custom Export Formats</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h2>Customization</h2>
+          <p>Tailor the platform to your needs</p>
+          <ul class="feature-list">
+            <li>Custom Strategy Configuration</li>
+            <li>Rule-Based Automation</li>
+            <li>API Integration Support</li>
+            <li>Webhook Integration</li>
+            <li>White-Label Options</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section id="pricing" class="pricing-section fade">
+    <!-- How It Works Section -->
+    <section id="how" class="how-it-works">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Get started in 4 simple steps</p>
+      
+      <div class="process-timeline">
+        <div class="process-step">
+          <div class="step-number">1</div>
+          <h3>Connect</h3>
+          <p>Link your trading accounts and API keys securely. We support all major exchanges and brokers.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">2</div>
+          <h3>Configure</h3>
+          <p>Set your trading parameters, risk levels, and strategy preferences in our intuitive dashboard.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">3</div>
+          <h3>Deploy</h3>
+          <p>Activate your strategy and let our AI handle the execution. Monitor from anywhere, anytime.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-number">4</div>
+          <h3>Optimize</h3>
+          <p>Track performance, analyze results, and optimize your strategy using real-time insights.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section">
       <h2 class="section-title">Simple, Transparent Pricing</h2>
       <p class="price-tag">₹2,50,000+</p>
-      <p class="price-note">One-Time Setup / Custom Deployment</p>
+      <p class="price-note">One-Time Setup & Enterprise Deployment | Custom Plans Available</p>
       <div class="button-group">
-        <a href="#" class="cta">
-          <span class="cta-content">Request Demo</span>
+        <a href="https://wa.me/917415660385?text=I%20would%20like%20to%20know%20more%20about%20pricing%20and%20custom%20plans" target="_blank" rel="noopener noreferrer" class="cta">
+          <span>Request Custom Quote</span>
         </a>
-        <a href="#" class="cta secondary">
-          <span class="cta-content">Contact Sales</span>
+        <a href="https://wa.me/917415660385?text=I%20would%20like%20to%20schedule%20a%20demo" target="_blank" rel="noopener noreferrer" class="cta secondary">
+          <span>Schedule Demo</span>
         </a>
+      </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="roadmap-section">
+      <h2 class="section-title">Product Roadmap</h2>
+      <p class="section-subtitle">Our exciting plans for 2024-2025</p>
+      
+      <div class="roadmap-timeline">
+        <div class="roadmap-item">
+          <div>
+            <div class="roadmap-date">Q2 2024 - Now</div>
+            <div class="roadmap-features">
+              <div class="roadmap-feature">
+                <span class="roadmap-badge">Live</span>
+                <div>
+                  <strong>Advanced Risk Engine</strong>
+                  <p>Real-time portfolio risk management and position sizing</p>
+                </div>
+              </div>
+              <div class="roadmap-feature">
+                <span class="roadmap-badge">Live</span>
+                <div>
+                  <strong>Multi-Exchange Support</strong>
+                  <p>Trade across NSE, BSE, Crypto, Forex simultaneously</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div>
+            <div class="roadmap-date">Q3 2024 - In Development</div>
+            <div class="roadmap-features">
+              <div class="roadmap-feature">
+                <span class="roadmap-badge">In Development</span>
+                <div>
+                  <strong>ML-Based Trade Filtering</strong>
+                  <p>AI models that learn and improve trading signals over time</p>
+                </div>
+              </div>
+              <div class="roadmap-feature">
+                <span class="roadmap-badge">In Development</span>
+                <div>
+                  <strong>Advanced Analytics Dashboard</strong>
+                  <p>Interactive charts, heatmaps, and deep performance analysis</p>
+                </div>
+              </div>
+              <div class="roadmap-feature">
+                <span class="roadmap-badge">In Development</span>
+                <div>
+                  <strong>Strategy Marketplace</strong>
+                  <p>Share and monetize trading strategies with other traders</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div>
+            <div class="roadmap-date">Q4 2024 - Coming Soon</div>
+            <div class="roadmap-features">
+              <div class="roadmap-feature">
+                <span class="roadmap-badge planned">Planned</span>
+                <div>
+                  <strong>Auto Hedging System</strong>
+                  <p>Automatic risk hedging with derivative instruments</p>
+                </div>
+              </div>
+              <div class="roadmap-feature">
+                <span class="roadmap-badge planned">Planned</span>
+                <div>
+                  <strong>Dynamic Position Sizing</strong>
+                  <p>Intelligent sizing based on volatility and account equity</p>
+                </div>
+              </div>
+              <div class="roadmap-feature">
+                <span class="roadmap-badge beta">Beta</span>
+                <div>
+                  <strong>Mobile Trading App</strong>
+                  <p>Trade and monitor on iOS and Android platforms</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-item">
+          <div>
+            <div class="roadmap-date">Q1 2025 - Future Plans</div>
+            <div class="roadmap-features">
+              <div class="roadmap-feature">
+                <span class="roadmap-badge planned">Planned</span>
+                <div>
+                  <strong>Event-Based Trading</strong>
+                  <p>Trigger trades based on news, economic events, and alerts</p>
+                </div>
+              </div>
+              <div class="roadmap-feature">
+                <span class="roadmap-badge planned">Planned</span>
+                <div>
+                  <strong>Latency Optimization</strong>
+                  <p>Sub-microsecond execution for HFT strategies</p>
+                </div>
+              </div>
+              <div class="roadmap-feature">
+                <span class="roadmap-badge planned">Planned</span>
+                <div>
+                  <strong>AI Advisory System</strong>
+                  <p>Personalized trading recommendations powered by GPT</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Everything you need to know about Trade Metrix</p>
+      
+      <div class="faq-grid">
+        <div class="faq-item">
+          <div class="faq-question">How quickly can I get started?</div>
+          <div class="faq-answer">Most traders are up and running within 24-48 hours of signing up. We handle all the technical setup and configuration for you.</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Is my data and API keys secure?</div>
+          <div class="faq-answer">We use enterprise-grade encryption, secure key management, and never store sensitive credentials in plain text. Your security is our top priority.</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">What exchanges are supported?</div>
+          <div class="faq-answer">We support NSE, BSE, MCX, NCDEX, and all major crypto exchanges. Custom integrations are available for other platforms.</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">Can I test before committing real capital?</div>
+          <div class="faq-answer">Absolutely! We offer paper trading mode where you can test your strategies with simulated capital risk-free.</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">What if I need custom development?</div>
+          <div class="faq-answer">Our technical team can build custom strategies, integrations, and features tailored to your specific trading needs.</div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">How much support do I get?</div>
+          <div class="faq-answer">All clients get 24/7 email and WhatsApp support, weekly strategy reviews, and direct access to our engineering team.</div>
+        </div>
       </div>
     </section>
   </div>
 </main>
 
-<footer class="fade">
+<footer>
   <div class="container">
     <p><strong>Trade Metrix Technologies</strong></p>
-    <p>Empowering Traders Through Automation</p>
-    <p style="margin-top: 20px; font-size: 12px; color: #677089;">© 2024 Trade Metrix. All rights reserved.</p>
+    <p>Empowering Traders & Institutions Through Intelligent Automation</p>
+    <p>📱 Contact: +91 7415660385 (WhatsApp)</p>
+    <p style="margin-top: 24px; font-size: 12px; color: #677089;">© 2024 Trade Metrix. All rights reserved. | Enterprise-Grade Algorithmic Trading</p>
   </div>
 </footer>
 
