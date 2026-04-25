@@ -2566,12 +2566,42 @@ footer strong {
 }
 
 .arch-stat-item {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0, 102, 255, 0.08);
+  padding: 12px 20px;
+  background: rgba(0, 102, 255, 0.1);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  transition: all 0.3s;
-  animation: fadeUp 0.8s ease both;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.arch-stat-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0, 212, 255, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.arch-stat-item:nth-child(1) { animation-delay: 0.2s; }
+.arch-stat-item:nth-child(2) { animation-delay: 0.25s; }
+.arch-stat-item:nth-child(3) { animation-delay: 0.3s; }
+.arch-stat-item:nth-child(4) { animation-delay: 0.35s; }
+
+.arch-stat-item:hover::before {
+  opacity: 1;
+}
+
+.arch-stat-item:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 102, 255, 0.08));
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 212, 255, 0.25);
 }
 
 .arch-stat-item:nth-child(1) { animation-delay: 1s; }
@@ -2586,10 +2616,36 @@ footer strong {
 
 .arch-stat-value {
   font-family: 'Sora', sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 800;
-  color: var(--success);
-  margin-bottom: 6px;
+  background: linear-gradient(135deg, var(--accent), var(--success));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 4px;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.1s both, countUp 0.6s ease 0.1s both;
+}
+
+.arch-stat-item:hover .arch-stat-value {
+  font-size: 20px;
+  animation: gradientText 2s ease infinite;
+}
+
+.arch-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.15s both;
+}
+
+.arch-stat-item:hover .arch-stat-label {
+  color: var(--accent);
 }
 
 .arch-stat-label {
@@ -2627,7 +2683,56 @@ footer strong {
 }
 
 .spec-item {
-  animation: fadeUp 0.8s ease both;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.spec-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.spec-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.spec-item:nth-child(1) { animation-delay: 0.1s; }
+.spec-item:nth-child(2) { animation-delay: 0.15s; }
+.spec-item:nth-child(3) { animation-delay: 0.2s; }
+.spec-item:nth-child(4) { animation-delay: 0.25s; }
+
+.spec-item:hover::before {
+  opacity: 1;
+}
+
+.spec-item:hover::after {
+  opacity: 1;
+}
+
+.spec-item:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 212, 255, 0.08));
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0, 102, 255, 0.25), 0 0 30px rgba(0, 212, 255, 0.15);
 }
 
 .spec-item:nth-child(1) { animation-delay: 0.2s; }
@@ -2636,13 +2741,80 @@ footer strong {
 .spec-item:nth-child(4) { animation-delay: 0.5s; }
 
 .spec-label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
-  margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: block;
+  margin-bottom: 8px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.15s both;
+}
+
+.spec-item:hover .spec-label {
+  color: var(--accent);
+}
+
+.spec-value {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--success));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 12px;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.2s both, countUp 0.6s ease 0.2s both;
+}
+
+.spec-item:hover .spec-value {
+  font-size: 22px;
+  animation: gradientText 2s ease infinite;
+}
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 102, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  animation: fadeUp 0.6s ease 0.25s both;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 10px;
+  animation: progress-fill 0.8s ease forwards;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6px;
+  transition: all 0.35s ease;
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+}
+
+.progress-bar:hover {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+  filter: brightness(1.1);
+}
+
+.progress-label {
+  font-size: 9px;
+  color: white;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.35s ease;
+}
+
+.progress-bar:hover .progress-label {
+  font-size: 10px;
 }
 
 .spec-value {
@@ -2781,15 +2953,63 @@ footer strong {
 .arch-layer:nth-child(4) { animation-delay: 0.8s; }
 
 .arch-box {
-  padding: 24px 32px;
-  background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 212, 255, 0.08));
-  border: 2px solid var(--primary);
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
+  border: 1px solid var(--border-color);
   border-radius: 12px;
-  text-align: center;
-  min-width: 200px;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
   position: relative;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
   overflow: hidden;
+}
+
+.arch-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.arch-box::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.arch-box:nth-child(1) { animation-delay: 0.1s; }
+.arch-box:nth-child(2) { animation-delay: 0.15s; }
+.arch-box:nth-child(3) { animation-delay: 0.2s; }
+.arch-box:nth-child(4) { animation-delay: 0.25s; }
+.arch-box:nth-child(5) { animation-delay: 0.3s; }
+
+.arch-box:hover::before {
+  opacity: 1;
+}
+
+.arch-box:hover::after {
+  opacity: 1;
+}
+
+.arch-box:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 212, 255, 0.08));
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 24px 72px rgba(0, 102, 255, 0.25), 0 0 40px rgba(0, 212, 255, 0.15);
 }
 
 .arch-box::before {
@@ -2815,10 +3035,35 @@ footer strong {
 
 .arch-box-title {
   font-family: 'Sora', sans-serif;
-  font-weight: 700;
   font-size: 16px;
-  color: var(--accent);
+  font-weight: 700;
+  color: var(--text-primary);
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.1s both;
+  position: relative;
+  z-index: 1;
+}
+
+.arch-box:hover .arch-box-title {
+  color: var(--accent);
+}
+
+.arch-box-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.15s both;
+  position: relative;
+  z-index: 1;
+}
+
+.arch-box:hover .arch-box-desc {
+  color: var(--text-primary);
 }
 
 .arch-box-desc {
@@ -2841,15 +3086,56 @@ footer strong {
     align-items: center;
   }
 
-  .comparison-chart-container {
-    background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 28px;
-    animation: fadeUp 0.8s ease both;
-    position: relative;
-    overflow: hidden;
-  }
+.comparison-chart-container {
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.comparison-chart-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.comparison-chart-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.comparison-chart-container:nth-child(1) { animation-delay: 0.1s; }
+.comparison-chart-container:nth-child(2) { animation-delay: 0.15s; }
+
+.comparison-chart-container:hover::before {
+  opacity: 1;
+}
+
+.comparison-chart-container:hover::after {
+  opacity: 1;
+}
+
+.comparison-chart-container:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.12), rgba(0, 212, 255, 0.06));
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 28px 72px rgba(0, 102, 255, 0.2), 0 0 40px rgba(0, 212, 255, 0.15);
+}
 
   .comparison-chart-container::before {
     content: "";
@@ -2862,16 +3148,29 @@ footer strong {
     animation: shimmer 3s infinite;
   }
 
-  .comparison-title {
-    font-family: 'Sora', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+.comparison-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.1s both;
+  position: relative;
+}
+
+.comparison-chart-container:hover .comparison-title {
+  background: linear-gradient(135deg, var(--accent), var(--success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
   .comparison-bars {
     display: flex;
@@ -2879,9 +3178,82 @@ footer strong {
     gap: 20px;
   }
 
-  .bar-item {
-    animation: fadeUp 0.6s ease both;
-  }
+.bar-item {
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  transition: all 0.35s ease;
+}
+
+.bar-item:nth-child(1) { animation-delay: 0.1s; }
+.bar-item:nth-child(2) { animation-delay: 0.15s; }
+.bar-item:nth-child(3) { animation-delay: 0.2s; }
+
+.bar-item:hover {
+  transform: translateX(8px);
+}
+
+.bar-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: block;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.15s both;
+}
+
+.bar-item:hover .bar-label {
+  color: var(--accent);
+}
+
+.bar-container {
+  width: 100%;
+  height: 36px;
+  background: rgba(0, 102, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.bar-container:hover {
+  background: rgba(0, 102, 255, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 102, 255, 0.2);
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  animation: slideInLeft 0.6s ease both;
+  padding: 0 12px;
+  white-space: nowrap;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  box-shadow: 0 2px 12px rgba(0, 102, 255, 0.2);
+}
+
+.bar-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 3s infinite;
+  border-radius: 8px;
+}
+
+.bar-container:hover .bar-fill {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(0, 102, 255, 0.4);
+}
 
   .bar-item:nth-child(1) { animation-delay: 0.3s; }
   .bar-item:nth-child(2) { animation-delay: 0.4s; }
@@ -2929,34 +3301,122 @@ footer strong {
     gap: 16px;
   }
 
-  .flow-step {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 16px;
-    align-items: start;
-    animation: fadeUp 0.6s ease both;
-  }
+.flow-step {
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 20px;
+  align-items: start;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.flow-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.flow-step::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.flow-step:nth-child(1) { animation-delay: 0.1s; }
+.flow-step:nth-child(2) { animation-delay: 0.15s; }
+.flow-step:nth-child(3) { animation-delay: 0.2s; }
+.flow-step:nth-child(4) { animation-delay: 0.25s; }
+
+.flow-step:hover::before {
+  opacity: 1;
+}
+
+.flow-step:hover::after {
+  opacity: 1;
+}
+
+.flow-step:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 212, 255, 0.08));
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 24px 72px rgba(0, 102, 255, 0.25), 0 0 40px rgba(0, 212, 255, 0.15);
+}
 
   .flow-step:nth-child(1) { animation-delay: 0.3s; }
   .flow-step:nth-child(2) { animation-delay: 0.4s; }
   .flow-step:nth-child(3) { animation-delay: 0.5s; }
   .flow-step:nth-child(4) { animation-delay: 0.6s; }
 
-  .flow-number {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Sora', sans-serif;
-    font-weight: 800;
-    color: white;
-    font-size: 18px;
-    flex-shrink: 0;
-    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
-  }
+.flow-number {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  color: white;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 102, 255, 0.3);
+  transition: all 0.35s ease;
+  animation: scaleIn 0.6s ease backwards;
+}
+
+.flow-step:nth-child(1) .flow-number { animation-delay: 0.15s; }
+.flow-step:nth-child(2) .flow-number { animation-delay: 0.2s; }
+.flow-step:nth-child(3) .flow-number { animation-delay: 0.25s; }
+.flow-step:nth-child(4) .flow-number { animation-delay: 0.3s; }
+
+.flow-step:hover .flow-number {
+  transform: scale(1.2) rotate(15deg);
+  box-shadow: 0 12px 40px rgba(0, 212, 255, 0.5);
+  animation: pulse 0.6s ease-in-out;
+}
+
+.flow-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.15s both;
+}
+
+.flow-step:hover .flow-title {
+  color: var(--accent);
+}
+
+.flow-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.flow-step:hover .flow-description {
+  color: var(--text-primary);
+}
 
   .flow-content {
     padding: 16px;
@@ -2995,14 +3455,92 @@ footer strong {
     border-top: 1px solid var(--border-color);
   }
 
-  .metric-compare {
-    text-align: center;
-    padding: 16px;
-    background: rgba(0, 255, 127, 0.08);
-    border-radius: 10px;
-    transition: all 0.3s;
-    animation: fadeUp 0.6s ease both;
-  }
+.metric-compare {
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: fadeUp 0.6s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-compare::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+
+.metric-compare::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--success), var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.metric-compare:nth-child(1) { animation-delay: 0.15s; }
+.metric-compare:nth-child(2) { animation-delay: 0.2s; }
+.metric-compare:nth-child(3) { animation-delay: 0.25s; }
+
+.metric-compare:hover::before {
+  opacity: 1;
+}
+
+.metric-compare:hover::after {
+  opacity: 1;
+}
+
+.metric-compare:hover {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.12), rgba(0, 212, 255, 0.06));
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 102, 255, 0.2), 0 0 30px rgba(0, 212, 255, 0.1);
+}
+
+.metric-compare-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: block;
+  transition: color 0.35s ease;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+.metric-compare:hover .metric-compare-label {
+  color: var(--accent);
+}
+
+.metric-compare-value {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--success), var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.35s ease;
+  animation: fadeUp 0.6s ease 0.25s both, countUp 0.6s ease 0.25s both;
+}
+
+.metric-compare:hover .metric-compare-value {
+  font-size: 22px;
+  animation: gradientText 2s ease infinite;
+}
 
   .metric-compare:hover {
     background: rgba(0, 255, 127, 0.12);
@@ -3866,7 +4404,7 @@ function initSystemMetricsChart() {
       <p class="section-subtitle">Enterprise-grade architecture powering automated trading with intelligent automation</p>
       
       <a href="https://trade.trademetrix.tech" target="_blank" rel="noopener noreferrer" class="algo-platform-cta">
-        <span class="algo-platform-cta-icon">🚀</span>
+        <span class="algo-platform-cta-icon">����</span>
         <span>Launch Algo Trading Platform</span>
         <span class="algo-platform-cta-icon">→</span>
       </a>
