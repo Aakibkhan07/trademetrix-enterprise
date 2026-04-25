@@ -154,6 +154,16 @@ header {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: slideInLeft 0.6s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  animation: slideInLeft 0.6s ease;
 }
 
 nav {
@@ -759,6 +769,96 @@ footer strong {
   margin: 120px 0;
 }
 
+.performance-section {
+  margin: 120px 0;
+}
+
+.performance-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-top: 60px;
+  animation: fadeUp 1s ease 0.4s both;
+}
+
+.performance-chart {
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-canvas {
+  width: 100%;
+  height: 300px;
+  display: block;
+}
+
+.performance-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.metric-card {
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 212, 255, 0.05));
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.3s;
+  animation: fadeUp 0.8s ease both;
+}
+
+.metric-card:nth-child(1) { animation-delay: 0.5s; }
+.metric-card:nth-child(2) { animation-delay: 0.6s; }
+.metric-card:nth-child(3) { animation-delay: 0.7s; }
+.metric-card:nth-child(4) { animation-delay: 0.8s; }
+
+.metric-card:hover {
+  transform: translateX(8px);
+  border-color: var(--primary);
+}
+
+.metric-label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-family: 'Sora', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--success), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.metric-description {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .performance-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .metric-value {
+    font-size: 24px;
+  }
+}
+
 .arch-diagram {
   background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(0, 212, 255, 0.03));
   border: 1px solid var(--border-color);
@@ -870,10 +970,176 @@ footer strong {
 
 <body>
 
+<script>
+// Performance Chart Animation
+function initPerformanceChart() {
+  const canvas = document.getElementById('performanceChart');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+
+  // Chart parameters
+  const initialInvestment = 1000000; // 10 lakhs
+  const monthlyReturn = 0.025; // 2.5%
+  const months = 12;
+  
+  // Calculate compound growth
+  const data = [];
+  for (let i = 0; i <= months; i++) {
+    const value = initialInvestment * Math.pow(1 + monthlyReturn, i);
+    data.push(value);
+  }
+
+  const maxValue = Math.max(...data);
+  const minValue = Math.min(...data);
+  const padding = 50;
+  const chartWidth = canvas.width - (padding * 2);
+  const chartHeight = canvas.height - (padding * 2);
+  const pointSpacing = chartWidth / months;
+
+  let animationFrame = 0;
+  const totalFrames = 120;
+
+  function drawChart(progress) {
+    // Clear canvas
+    ctx.fillStyle = 'rgba(10, 14, 39, 0.3)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw grid lines
+    ctx.strokeStyle = 'rgba(26, 40, 71, 0.3)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = padding + (chartHeight / 4) * i;
+      ctx.beginPath();
+      ctx.moveTo(padding, y);
+      ctx.lineTo(canvas.width - padding, y);
+      ctx.stroke();
+    }
+
+    // Draw axes
+    ctx.strokeStyle = 'rgba(26, 40, 71, 0.6)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(padding, padding);
+    ctx.lineTo(padding, canvas.height - padding);
+    ctx.lineTo(canvas.width - padding, canvas.height - padding);
+    ctx.stroke();
+
+    // Draw gradient fill
+    const gradient = ctx.createLinearGradient(0, padding, 0, canvas.height - padding);
+    gradient.addColorStop(0, 'rgba(0, 255, 127, 0.3)');
+    gradient.addColorStop(1, 'rgba(0, 102, 255, 0.05)');
+
+    // Draw data line with animation
+    ctx.beginPath();
+    let started = false;
+
+    for (let i = 0; i <= months; i++) {
+      const animatedIndex = (i / months) * progress;
+      if (animatedIndex > i) continue;
+
+      const x = padding + i * pointSpacing;
+      const normalizedValue = (data[i] - minValue) / (maxValue - minValue);
+      const y = canvas.height - padding - (normalizedValue * chartHeight);
+
+      if (!started) {
+        ctx.moveTo(x, y);
+        started = true;
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+
+    ctx.lineTo(canvas.width - padding, canvas.height - padding);
+    ctx.lineTo(padding, canvas.height - padding);
+    ctx.closePath();
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    // Draw line
+    ctx.beginPath();
+    started = false;
+    for (let i = 0; i <= months; i++) {
+      const animatedIndex = (i / months) * progress;
+      if (animatedIndex > i) continue;
+
+      const x = padding + i * pointSpacing;
+      const normalizedValue = (data[i] - minValue) / (maxValue - minValue);
+      const y = canvas.height - padding - (normalizedValue * chartHeight);
+
+      if (!started) {
+        ctx.moveTo(x, y);
+        started = true;
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+
+    ctx.strokeStyle = '#00ff7f';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    // Draw points
+    for (let i = 0; i <= months; i++) {
+      const animatedIndex = (i / months) * progress;
+      if (animatedIndex < i) continue;
+
+      const x = padding + i * pointSpacing;
+      const normalizedValue = (data[i] - minValue) / (maxValue - minValue);
+      const y = canvas.height - padding - (normalizedValue * chartHeight);
+
+      ctx.beginPath();
+      ctx.arc(x, y, 6, 0, Math.PI * 2);
+      ctx.fillStyle = '#00d4ff';
+      ctx.fill();
+      ctx.strokeStyle = '#0066ff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // Draw labels
+    ctx.fillStyle = 'rgba(160, 174, 192, 0.7)';
+    ctx.font = '12px Inter';
+    ctx.textAlign = 'center';
+    for (let i = 0; i <= months; i += 3) {
+      const x = padding + i * pointSpacing;
+      ctx.fillText('M' + i, x, canvas.height - padding + 25);
+    }
+
+    if (progress < 1) {
+      animationFrame = requestAnimationFrame(() => {
+        drawChart(Math.min(1, animationFrame / totalFrames + 1 / totalFrames));
+      });
+    }
+  }
+
+  // Start animation
+  drawChart(0);
+
+  // Redraw on window resize
+  window.addEventListener('resize', () => {
+    const newRect = canvas.getBoundingClientRect();
+    if (newRect.width !== canvas.width) {
+      drawChart(1);
+    }
+  });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initPerformanceChart);
+</script>
+
 <header>
   <div class="container">
     <div class="header-content">
-      <div class="logo">◆ Trade Metrix Technologies</div>
+      <div class="logo">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202026-04-25%20at%204.14.23%E2%80%AFPM-x0EFPWLJHabHdP04dc5GNBRVFi3CkE.png" alt="Trade Metrix Logo">
+      </div>
       <nav>
         <a href="#features">Features</a>
         <a href="#how">How It Works</a>
@@ -1008,7 +1274,45 @@ footer strong {
       </div>
     </section>
 
-    <!-- Architecture Diagram Section -->
+    <!-- Performance & Compounding Section -->
+    <section class="performance-section">
+      <h2 class="section-title">Performance & Compound Growth</h2>
+      <p class="section-subtitle">See how your investment grows with our algorithmic trading engine</p>
+      
+      <div class="performance-container">
+        <div class="performance-chart">
+          <canvas id="performanceChart"></canvas>
+        </div>
+        
+        <div class="performance-metrics">
+          <div class="metric-card">
+            <div class="metric-label">Initial Investment</div>
+            <div class="metric-value" id="initialValue">₹10,00,000</div>
+            <div class="metric-description">Starting capital</div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-label">Average Monthly Return</div>
+            <div class="metric-value" id="monthlyReturn">2.5%</div>
+            <div class="metric-description">Based on 12-month performance</div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-label">Final Value (12 Months)</div>
+            <div class="metric-value" id="finalValue">₹13,24,557</div>
+            <div class="metric-description">With compound growth</div>
+          </div>
+          
+          <div class="metric-card">
+            <div class="metric-label">Total Profit</div>
+            <div class="metric-value" id="totalProfit">₹3,24,557</div>
+            <div class="metric-description">32.46% return on investment</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Section -->
     <section class="architecture-section">
       <h2 class="section-title">How Algo Trading Works</h2>
       <p class="section-subtitle">Enterprise-grade architecture powering automated trading</p>
