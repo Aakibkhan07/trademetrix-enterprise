@@ -1405,11 +1405,202 @@ footer strong {
   line-height: 1.6;
 }
 
-.arch-arrow {
-  font-size: 32px;
-  color: var(--success);
-  animation: float 2s ease-in-out infinite;
-}
+  .arch-arrow {
+    font-size: 32px;
+    color: var(--success);
+    animation: float 2s ease-in-out infinite;
+  }
+
+  .visual-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 40px;
+    align-items: center;
+  }
+
+  .comparison-chart-container {
+    background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 28px;
+    animation: fadeUp 0.8s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .comparison-chart-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--success), var(--accent));
+    animation: shimmer 3s infinite;
+  }
+
+  .comparison-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .comparison-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .bar-item {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .bar-item:nth-child(1) { animation-delay: 0.3s; }
+  .bar-item:nth-child(2) { animation-delay: 0.4s; }
+  .bar-item:nth-child(3) { animation-delay: 0.5s; }
+
+  .bar-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .bar-container {
+    width: 100%;
+    height: 32px;
+    background: rgba(26, 40, 71, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success), var(--accent));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+    animation: slideInLeft 1s ease-out both;
+  }
+
+  .bar-item:nth-child(1) .bar-fill { animation-delay: 0.3s; }
+  .bar-item:nth-child(2) .bar-fill { animation-delay: 0.5s; }
+  .bar-item:nth-child(3) .bar-fill { animation-delay: 0.7s; }
+
+  .process-flow-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .flow-step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .flow-step:nth-child(1) { animation-delay: 0.3s; }
+  .flow-step:nth-child(2) { animation-delay: 0.4s; }
+  .flow-step:nth-child(3) { animation-delay: 0.5s; }
+  .flow-step:nth-child(4) { animation-delay: 0.6s; }
+
+  .flow-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+  }
+
+  .flow-content {
+    padding: 16px;
+    background: rgba(0, 102, 255, 0.08);
+    border-left: 3px solid var(--primary);
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+
+  .flow-step:hover .flow-content {
+    background: rgba(0, 102, 255, 0.12);
+    border-left-color: var(--accent);
+    transform: translateX(8px);
+  }
+
+  .flow-title {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .flow-description {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .metrics-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .metric-compare {
+    text-align: center;
+    padding: 16px;
+    background: rgba(0, 255, 127, 0.08);
+    border-radius: 10px;
+    transition: all 0.3s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .metric-compare:hover {
+    background: rgba(0, 255, 127, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .metric-compare-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .metric-compare-value {
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--success);
+  }
 
 @media (max-width: 768px) {
   .arch-diagram {
@@ -1599,7 +1790,189 @@ function initPerformanceChart() {
 }
 
 // Initialize when page loads
-document.addEventListener('DOMContentLoaded', initPerformanceChart);
+document.addEventListener('DOMContentLoaded', () => {
+  initPerformanceChart();
+  initComparisonChart();
+  initSystemMetricsChart();
+});
+
+// Comparison Chart - Simple vs Compound Interest
+function initComparisonChart() {
+  const canvas = document.getElementById('comparisonChart');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+
+  const initialInvestment = 1000000;
+  const monthlyReturn = 0.025;
+  const months = 12;
+  
+  const compoundData = [];
+  const simpleData = [];
+  
+  for (let i = 0; i <= months; i++) {
+    compoundData.push(initialInvestment * Math.pow(1 + monthlyReturn, i));
+    simpleData.push(initialInvestment + (initialInvestment * monthlyReturn * i));
+  }
+
+  const maxValue = Math.max(...compoundData);
+  const minValue = initialInvestment;
+  const padding = 50;
+  const chartWidth = canvas.width - (padding * 2);
+  const chartHeight = canvas.height - (padding * 2);
+  const pointSpacing = chartWidth / months;
+
+  let animationFrame = 0;
+  const totalFrames = 120;
+
+  function drawChart(progress) {
+    ctx.fillStyle = 'rgba(10, 14, 39, 0.3)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Grid
+    ctx.strokeStyle = 'rgba(26, 40, 71, 0.2)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = padding + (chartHeight / 4) * i;
+      ctx.beginPath();
+      ctx.moveTo(padding, y);
+      ctx.lineTo(canvas.width - padding, y);
+      ctx.stroke();
+    }
+
+    // Axes
+    ctx.strokeStyle = 'rgba(26, 40, 71, 0.6)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(padding, padding);
+    ctx.lineTo(padding, canvas.height - padding);
+    ctx.lineTo(canvas.width - padding, canvas.height - padding);
+    ctx.stroke();
+
+    // Draw simple interest line
+    ctx.strokeStyle = 'rgba(255, 107, 53, 0.6)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let i = 0; i <= months; i++) {
+      const animatedIndex = (i / months) * progress;
+      if (animatedIndex > i) continue;
+      
+      const x = padding + i * pointSpacing;
+      const normalizedValue = (simpleData[i] - minValue) / (maxValue - minValue);
+      const y = canvas.height - padding - (normalizedValue * chartHeight);
+      
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Draw compound interest line
+    ctx.strokeStyle = '#00ff7f';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    for (let i = 0; i <= months; i++) {
+      const animatedIndex = (i / months) * progress;
+      if (animatedIndex > i) continue;
+      
+      const x = padding + i * pointSpacing;
+      const normalizedValue = (compoundData[i] - minValue) / (maxValue - minValue);
+      const y = canvas.height - padding - (normalizedValue * chartHeight);
+      
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Legend
+    ctx.fillStyle = 'rgba(255, 107, 53, 0.6)';
+    ctx.fillRect(padding + 10, padding + 10, 12, 12);
+    ctx.fillStyle = 'rgba(160, 174, 192, 0.8)';
+    ctx.font = '12px Inter';
+    ctx.fillText('Simple', padding + 30, padding + 20);
+
+    ctx.fillStyle = '#00ff7f';
+    ctx.fillRect(padding + 150, padding + 10, 12, 12);
+    ctx.fillStyle = 'rgba(160, 174, 192, 0.8)';
+    ctx.fillText('Compound', padding + 170, padding + 20);
+
+    if (progress < 1) {
+      animationFrame = requestAnimationFrame(() => {
+        drawChart(Math.min(1, animationFrame / totalFrames + 1 / totalFrames));
+      });
+    }
+  }
+
+  drawChart(0);
+}
+
+// System Metrics Chart - Performance indicators
+function initSystemMetricsChart() {
+  const canvas = document.getElementById('systemMetricsChart');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+
+  const metrics = [
+    { label: 'Processing Speed', value: 98, color: '#00ff7f' },
+    { label: 'Accuracy', value: 94, color: '#00d4ff' },
+    { label: 'Uptime', value: 99.9, color: '#0066ff' },
+    { label: 'Execution Speed', value: 99, color: '#00ff7f' }
+  ];
+
+  const barHeight = canvas.height / metrics.length;
+  const padding = 40;
+
+  let animationFrame = 0;
+  const totalFrames = 100;
+
+  function drawChart(progress) {
+    ctx.fillStyle = 'rgba(10, 14, 39, 0.3)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    metrics.forEach((metric, index) => {
+      const y = index * barHeight + 15;
+      const barWidth = (canvas.width - padding - 20);
+      const fillWidth = (metric.value / 100) * barWidth * Math.min(1, progress * 1.2);
+
+      // Label
+      ctx.fillStyle = 'rgba(160, 174, 192, 0.8)';
+      ctx.font = 'bold 12px Inter';
+      ctx.textAlign = 'left';
+      ctx.fillText(metric.label, 15, y + 12);
+
+      // Background bar
+      ctx.fillStyle = 'rgba(26, 40, 71, 0.5)';
+      ctx.fillRect(padding, y, barWidth, 20);
+
+      // Gradient fill
+      const gradient = ctx.createLinearGradient(padding, 0, padding + fillWidth, 0);
+      gradient.addColorStop(0, metric.color);
+      gradient.addColorStop(1, '#00d4ff');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(padding, y, fillWidth, 20);
+
+      // Value text
+      ctx.fillStyle = 'white';
+      ctx.font = 'bold 11px Inter';
+      ctx.textAlign = 'right';
+      ctx.fillText(metric.value + '%', canvas.width - 10, y + 12);
+    });
+
+    if (progress < 1) {
+      animationFrame = requestAnimationFrame(() => {
+        drawChart(Math.min(1, animationFrame / totalFrames + 1 / totalFrames));
+      });
+    }
+  }
+
+  drawChart(0);
+}
 </script>
 
 <header>
@@ -1823,7 +2196,112 @@ document.addEventListener('DOMContentLoaded', initPerformanceChart);
       </div>
     </section>
 
-    <!-- Architecture Section -->
+    <!-- Visual Comparison Section -->
+    <section class="performance-section">
+      <h2 class="section-title">Simple vs Compound Interest Visualization</h2>
+      <p class="section-subtitle">Watch how compound growth dramatically outperforms simple interest over time</p>
+
+      <div class="visual-comparison">
+        <div class="comparison-chart-container">
+          <div class="comparison-title">
+            <span>📊</span> Growth Comparison Chart
+          </div>
+          <canvas id="comparisonChart" style="width: 100%; height: 280px;"></canvas>
+        </div>
+
+        <div class="comparison-chart-container">
+          <div class="comparison-title">
+            <span>📈</span> Returns Breakdown
+          </div>
+          <div class="comparison-bars">
+            <div class="bar-item">
+              <div class="bar-label">Simple Interest (12 Mo)</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 75%;">₹13,00,000</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">Compound Interest (12 Mo)</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 100%;">₹13,24,557</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">Compounding Advantage</div>
+              <div class="bar-container">
+                <div class="bar-fill" style="width: 15%; background: linear-gradient(90deg, #00ff7f, #00d4ff);">+₹24,557</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="metrics-comparison">
+            <div class="metric-compare">
+              <div class="metric-compare-label">Extra Gains</div>
+              <div class="metric-compare-value">+₹25K</div>
+            </div>
+            <div class="metric-compare">
+              <div class="metric-compare-label">Growth Factor</div>
+              <div class="metric-compare-value">1.34x</div>
+            </div>
+            <div class="metric-compare">
+              <div class="metric-compare-label">Advantage %</div>
+              <div class="metric-compare-value">1.89%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Explanation Section -->
+    <section class="performance-section">
+      <h2 class="section-title">Trading Workflow Breakdown</h2>
+      <p class="section-subtitle">Step-by-step process of how our algorithmic trading system executes trades</p>
+
+      <div class="visual-comparison">
+        <div class="comparison-chart-container">
+          <div class="comparison-title">
+            <span>🔄</span> Complete Trading Cycle
+          </div>
+          <div class="process-flow-diagram">
+            <div class="flow-step">
+              <div class="flow-number">1</div>
+              <div class="flow-content">
+                <div class="flow-title">Market Monitoring</div>
+                <div class="flow-description">Real-time feed from 10+ exchanges. Analyzes price action, volume, and market conditions 24/7.</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-number">2</div>
+              <div class="flow-content">
+                <div class="flow-title">Signal Generation</div>
+                <div class="flow-description">AI/ML engine processes 1000+ data points per second. Generates high-probability buy/sell signals.</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-number">3</div>
+              <div class="flow-content">
+                <div class="flow-title">Risk Validation</div>
+                <div class="flow-description">Checks position size, drawdown limits, correlation risks. Validates against portfolio constraints in &lt;1ms.</div>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="flow-number">4</div>
+              <div class="flow-content">
+                <div class="flow-title">Order Execution</div>
+                <div class="flow-description">Places order via optimal broker. Confirms execution within milliseconds. Logs all transaction data.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-chart-container">
+          <div class="comparison-title">
+            <span>⚙️</span> System Performance Metrics
+          </div>
+          <canvas id="systemMetricsChart" style="width: 100%; height: 300px;"></canvas>
+        </div>
+      </div>
+    </section>
     <section class="architecture-section">
       <h2 class="section-title">How Algo Trading Works</h2>
       <p class="section-subtitle">Enterprise-grade architecture powering automated trading with intelligent automation</p>
