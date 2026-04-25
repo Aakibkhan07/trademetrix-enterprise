@@ -103,6 +103,17 @@ body::after {
   }
 }
 
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-15px); }
@@ -121,6 +132,24 @@ body::after {
 @keyframes shimmer {
   0% { background-position: -1000px 0; }
   100% { background-position: 1000px 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.4), inset 0 0 4px rgba(0, 212, 255, 0.2);
+  }
+  50% { 
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.8), inset 0 0 8px rgba(0, 212, 255, 0.4);
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--progress-width);
+  }
 }
 
 .container {
@@ -145,6 +174,13 @@ header {
   align-items: center;
 }
 
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: slideInLeft 0.6s ease;
+}
+
 .logo {
   font-size: 20px;
   font-weight: 800;
@@ -157,7 +193,18 @@ header {
   display: flex;
   align-items: center;
   gap: 12px;
-  height: 40px;
+  height: 60px;
+}
+
+.company-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+  animation: slideInLeft 0.6s ease 0.1s both;
+  padding-left: 12px;
+  border-left: 2px solid var(--border-color);
 }
 
 .logo img {
@@ -1261,7 +1308,9 @@ footer strong {
 
 .arch-box:hover {
   transform: translateY(-12px) scale(1.05);
-  box-shadow: 0 24px 72px rgba(0, 102, 255, 0.35), inset 0 0 20px rgba(0, 212, 255, 0.1);
+  box-shadow: 0 24px 72px rgba(0, 102, 255, 0.35), 
+              inset 0 0 20px rgba(0, 212, 255, 0.1),
+              0 0 40px rgba(0, 212, 255, 0.2);
   border-color: var(--accent);
   background: linear-gradient(135deg, rgba(0, 102, 255, 0.25), rgba(0, 212, 255, 0.15));
 }
@@ -1334,6 +1383,165 @@ footer strong {
   color: var(--text-secondary);
   font-weight: 600;
   text-transform: uppercase;
+}
+
+/* Animated Progress Bars */
+.tech-specs-section {
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.08), rgba(0, 212, 255, 0.03));
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px;
+  margin-top: 60px;
+  animation: fadeUp 1s ease 0.4s both;
+}
+
+.spec-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tech-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.spec-item {
+  animation: fadeUp 0.8s ease both;
+}
+
+.spec-item:nth-child(1) { animation-delay: 0.2s; }
+.spec-item:nth-child(2) { animation-delay: 0.3s; }
+.spec-item:nth-child(3) { animation-delay: 0.4s; }
+.spec-item:nth-child(4) { animation-delay: 0.5s; }
+
+.spec-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+}
+
+.spec-value {
+  font-family: 'Sora', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.progress-container {
+  background: rgba(26, 40, 71, 0.6);
+  border-radius: 8px;
+  height: 24px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--success));
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  animation: progress-fill 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.progress-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glowing Connection Dots */
+.arch-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin: 12px 0;
+  animation: glow-pulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.arch-dot::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background: radial-gradient(circle, var(--success) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.arch-dot.secondary {
+  background: var(--success);
+  animation-delay: 0.3s;
+}
+
+.arch-dot.secondary::before {
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+}
+
+/* System Architecture with Connections */
+.arch-layer-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.arch-connection {
+  position: absolute;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--accent), var(--success));
+  left: 50%;
+  transform: translateX(-50%);
+  animation: slideInDown 0.8s ease both;
+}
+
+.arch-connection.vertical {
+  width: 2px;
+  height: 60px;
+  top: -60px;
+}
+
+.arch-connection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(2px);
+  opacity: 0.5;
 }
 
 .arch-flow {
@@ -1982,8 +2190,11 @@ function initSystemMetricsChart() {
 <header>
   <div class="container">
     <div class="header-content">
-      <div class="logo">
-        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-25%20at%204.25.10%20PM-YLL9VckmTOS1OoWhv4BsuItBR55BsX.jpeg" alt="Trade Metrix Logo">
+      <div class="logo-section">
+        <div class="logo">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202026-04-25%20at%204.25.10%20PM-YLL9VckmTOS1OoWhv4BsuItBR55BsX.jpeg" alt="Trade Metrix Logo">
+        </div>
+        <div class="company-name">Trade Metrix Technologies</div>
       </div>
       <nav>
         <a href="#features">Features</a>
@@ -2366,6 +2577,56 @@ function initSystemMetricsChart() {
             <div class="arch-stat-item">
               <div class="arch-stat-value">500+</div>
               <div class="arch-stat-label">Active Strategies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specifications Section -->
+    <section class="performance-section">
+      <h2 class="section-title">Technical Specifications</h2>
+      <p class="section-subtitle">Enterprise-grade performance metrics and system capabilities</p>
+
+      <div class="tech-specs-section">
+        <div class="spec-title">
+          <span>⚙️</span> System Performance
+        </div>
+        <div class="tech-specs-grid">
+          <div class="spec-item">
+            <label class="spec-label">Order Execution Speed</label>
+            <span class="spec-value">0.02 seconds</span>
+            <div class="progress-container">
+              <div class="progress-bar" style="--progress-width: 98%;">
+                <span class="progress-label">98%</span>
+              </div>
+            </div>
+          </div>
+          <div class="spec-item">
+            <label class="spec-label">Data Processing Rate</label>
+            <span class="spec-value">10,000 ticks/sec</span>
+            <div class="progress-container">
+              <div class="progress-bar" style="--progress-width: 94%; animation-delay: 0.1s;">
+                <span class="progress-label">94%</span>
+              </div>
+            </div>
+          </div>
+          <div class="spec-item">
+            <label class="spec-label">System Uptime</label>
+            <span class="spec-value">99.9%</span>
+            <div class="progress-container">
+              <div class="progress-bar" style="--progress-width: 99%; animation-delay: 0.2s;">
+                <span class="progress-label">99%</span>
+              </div>
+            </div>
+          </div>
+          <div class="spec-item">
+            <label class="spec-label">Latency (NSE/BSE)</label>
+            <span class="spec-value">&lt; 5ms</span>
+            <div class="progress-container">
+              <div class="progress-bar" style="--progress-width: 92%; animation-delay: 0.3s;">
+                <span class="progress-label">92%</span>
+              </div>
             </div>
           </div>
         </div>
